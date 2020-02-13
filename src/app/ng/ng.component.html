@@ -1,0 +1,76 @@
+<!--<div class="wrap">-->
+<!--  <div class="Login">-->
+<!--    <form>-->
+<!--      <label>-->
+<!--        Username:-->
+<!--        <input type="text" formControlName="email"  placeholder="Nhập email ten"/>-->
+<!--      </label>-->
+<!--      <label>-->
+<!--        Giới Tính:-->
+<!--        <input type="radio" formControlName="gender"/>Nam-->
+<!--        <input type="radio" formControlName="gender"/>Nữ-->
+<!--      </label>-->
+<!--      <label>-->
+<!--        Sở thích: <br/>-->
+<!--        <input type="checkbox" formControlName="tc"/>Đọc sách-->
+<!--        <input type="checkbox"/>Chơi thể thao-->
+<!--        <input type="checkbox"/>Chơi game-->
+<!--        <input type="checkbox"/>Đi du lịch-->
+<!--      </label>-->
+<!--      <label>-->
+<!--        Số điện thoại:-->
+<!--        <input type="text" placeholder="Nhập số điện thoại"/>-->
+<!--      </label>-->
+<!--      <label>-->
+<!--        Tuổi:-->
+<!--        <input type="number"/>-->
+<!--      </label>-->
+<!--      <label>-->
+<!--        Các mùa trong năm:-->
+<!--        <ul>-->
+<!--          <li *ngFor="let sea of seasons">-->
+<!--            <p>aaaaa{{sea}}</p>-->
+<!--          </li>-->
+<!--        </ul>-->
+
+<!--      </label>-->
+
+<!--&lt;!&ndash;      <button class="btn-success next" type="submit">Next >></button>&ndash;&gt;-->
+<!--    </form>-->
+
+<!--  </div>-->
+
+<!--</div>-->
+<div class = "wrap">
+  <div class="input">
+    <input type="text" placeholder="nhap color" [(ngModel)]="newcolor" ><br>
+    <input type="text" placeholder="nhap flower" [(ngModel)]="newflower" ><br>
+    <br/>
+    <button (click)="addSeason()">Thêm mới</button>
+
+    <br/> <br/>
+    <select [(ngModel)]="filterStatus">
+      <option value="Xem_tat_ca">Xem tất cả</option>
+      <option value="Xem_mau_hoa_dung">Xem màu hoa đúng</option>
+      <option value="Xem_mau_hoa_sai">Xem màu hoa sai</option>
+    </select>
+    <br/> <br/>
+  </div >
+  <div *ngFor="let season of seasons" class="output">
+<!--    lọc phần tử cách 1-->
+    <div *ngIf="filterStatus ==='Xem_tat_ca' ||
+    (filterStatus === 'Xem_mau_hoa_dung' && season.status)
+    || (filterStatus === 'Xem_mau_hoa_sai' && !season.status)">
+      <h4 >{{season.id}} {{season.color}} :
+        <span [ngStyle]="{ color: season.status? 'green':'red'}">{{season.flower}}</span><br>
+      </h4>
+      <button (click)="removeseasons( season.id);">Xóa</button>
+      <button (click)="season.status = !season.status">
+        {{ season.status ? 'Đúng màu' : 'Sai màu'}}
+
+      </button>
+    </div>
+  </div>
+
+</div>
+
